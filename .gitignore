@@ -50,3 +50,7 @@ node_modules/
 # Environment files
 .env
 .env.local
+
+# Screenshots
+github-repo-created.png
+github_login_screenshot.png
