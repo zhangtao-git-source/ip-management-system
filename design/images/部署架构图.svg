@@ -1,0 +1,46 @@
+<svg width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei,sans-serif">
+  <rect x="150" y="10" width="200" height="50" rx="8" fill="#e6f7ff" stroke="#1890ff" stroke-width="2"/>
+  <text x="250" y="33" font-size="14" fill="#1890ff" text-anchor="middle" font-weight="bold">Nginx</text>
+  <text x="250" y="50" font-size="10" fill="#8c8c8c" text-anchor="middle">反向代理 / 负载均衡</text>
+
+  <line x1="250" y1="60" x2="250" y2="85" stroke="#8c8c8c" stroke-width="2"/>
+  <polygon points="250,90 244,80 256,80" fill="#8c8c8c"/>
+
+  <rect x="100" y="95" width="300" height="50" rx="8" fill="#f6ffed" stroke="#52c41a" stroke-width="2"/>
+  <text x="250" y="118" font-size="14" fill="#52c41a" text-anchor="middle" font-weight="bold">Spring Boot :8080</text>
+  <text x="250" y="135" font-size="10" fill="#8c8c8c" text-anchor="middle">IP地址管理系统</text>
+
+  <line x1="150" y1="145" x2="90" y2="190" stroke="#8c8c8c" stroke-width="2"/>
+  <polygon points="90,195 84,185 96,185" fill="#8c8c8c"/>
+  <line x1="250" y1="145" x2="250" y2="190" stroke="#8c8c8c" stroke-width="2"/>
+  <polygon points="250,195 244,185 256,185" fill="#8c8c8c"/>
+  <line x1="350" y1="145" x2="410" y2="190" stroke="#8c8c8c" stroke-width="2"/>
+  <polygon points="410,195 404,185 416,185" fill="#8c8c8c"/>
+
+  <rect x="20" y="200" width="160" height="50" rx="8" fill="#f9f0ff" stroke="#722ed1" stroke-width="2"/>
+  <text x="100" y="223" font-size="13" fill="#722ed1" text-anchor="middle" font-weight="bold">MySQL :3306</text>
+  <text x="100" y="240" font-size="10" fill="#8c8c8c" text-anchor="middle">业务数据库</text>
+
+  <rect x="200" y="200" width="160" height="50" rx="8" fill="#fff7e6" stroke="#fa8c16" stroke-width="2"/>
+  <text x="280" y="223" font-size="13" fill="#fa8c16" text-anchor="middle" font-weight="bold">Redis :6379</text>
+  <text x="280" y="240" font-size="10" fill="#8c8c8c" text-anchor="middle">缓存 / 分布式锁</text>
+
+  <rect x="360" y="200" width="120" height="50" rx="8" fill="#fff1f0" stroke="#f5222d" stroke-width="2"/>
+  <text x="420" y="223" font-size="13" fill="#f5222d" text-anchor="middle" font-weight="bold">SFTP :22</text>
+  <text x="420" y="240" font-size="10" fill="#8c8c8c" text-anchor="middle">资源中心推送</text>
+
+  <line x1="100" y1="250" x2="100" y2="275" stroke="#8c8c8c" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="280" y1="250" x2="280" y2="275" stroke="#8c8c8c" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="420" y1="250" x2="420" y2="275" stroke="#8c8c8c" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+  <text x="250" y="273" font-size="12" fill="#8c8c8c" text-anchor="middle">— 外部系统 —</text>
+
+  <rect x="40" y="285" width="130" height="45" rx="6" fill="#fff" stroke="#8c8c8c" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="105" y="312" font-size="12" fill="#8c8c8c" text-anchor="middle">CRM/工单系统</text>
+
+  <rect x="190" y="285" width="120" height="45" rx="6" fill="#fff" stroke="#8c8c8c" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="250" y="312" font-size="12" fill="#8c8c8c" text-anchor="middle">网管系统</text>
+
+  <rect x="330" y="285" width="130" height="45" rx="6" fill="#fff" stroke="#8c8c8c" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="395" y="312" font-size="12" fill="#8c8c8c" text-anchor="middle">认证中心</text>
+</svg>

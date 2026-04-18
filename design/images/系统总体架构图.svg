@@ -1,0 +1,67 @@
+<svg width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei,sans-serif">
+  <rect x="30" y="10" width="620" height="80" rx="8" fill="#e6f7ff" stroke="#1890ff" stroke-width="2"/>
+  <text x="50" y="30" font-size="13" fill="#1890ff" font-weight="bold">用户接入层</text>
+  <rect x="50" y="38" width="160" height="40" rx="6" fill="#1890ff"/>
+  <text x="130" y="63" font-size="13" fill="#fff" text-anchor="middle">Web管理门户</text>
+  <rect x="230" y="38" width="160" height="40" rx="6" fill="#1890ff"/>
+  <text x="310" y="63" font-size="13" fill="#fff" text-anchor="middle">运维管理App</text>
+  <rect x="410" y="38" width="220" height="40" rx="6" fill="#1890ff"/>
+  <text x="520" y="58" font-size="13" fill="#fff" text-anchor="middle">API网关</text>
+  <text x="520" y="74" font-size="10" fill="#e8f4ff" text-anchor="middle">认证 / 限流 / 路由</text>
+
+  <polygon points="340,100 330,95 350,95" fill="#8c8c8c"/>
+  <line x1="340" y1="95" x2="340" y2="100" stroke="#8c8c8c" stroke-width="2"/>
+
+  <rect x="30" y="105" width="620" height="80" rx="8" fill="#f6ffed" stroke="#52c41a" stroke-width="2"/>
+  <text x="50" y="125" font-size="13" fill="#52c41a" font-weight="bold">业务应用层</text>
+  <rect x="50" y="133" width="110" height="40" rx="6" fill="#52c41a"/>
+  <text x="105" y="158" font-size="12" fill="#fff" text-anchor="middle">地址资源管理</text>
+  <rect x="170" y="133" width="110" height="40" rx="6" fill="#52c41a"/>
+  <text x="225" y="158" font-size="12" fill="#fff" text-anchor="middle">地址分配管理</text>
+  <rect x="290" y="133" width="90" height="40" rx="6" fill="#52c41a"/>
+  <text x="335" y="158" font-size="12" fill="#fff" text-anchor="middle">稽核管理</text>
+  <rect x="390" y="133" width="90" height="40" rx="6" fill="#52c41a"/>
+  <text x="435" y="158" font-size="12" fill="#fff" text-anchor="middle">设备管理</text>
+  <rect x="490" y="133" width="140" height="40" rx="6" fill="#52c41a"/>
+  <text x="560" y="158" font-size="12" fill="#fff" text-anchor="middle">统计报表</text>
+
+  <polygon points="340,195 330,190 350,190" fill="#8c8c8c"/>
+  <line x1="340" y1="190" x2="340" y2="195" stroke="#8c8c8c" stroke-width="2"/>
+
+  <rect x="30" y="200" width="620" height="80" rx="8" fill="#fff7e6" stroke="#fa8c16" stroke-width="2"/>
+  <text x="50" y="220" font-size="13" fill="#fa8c16" font-weight="bold">服务支撑层</text>
+  <rect x="50" y="228" width="130" height="40" rx="6" fill="#fa8c16"/>
+  <text x="115" y="253" font-size="12" fill="#fff" text-anchor="middle">IP分配引擎</text>
+  <rect x="195" y="228" width="130" height="40" rx="6" fill="#fa8c16"/>
+  <text x="260" y="253" font-size="12" fill="#fff" text-anchor="middle">稽核调度引擎</text>
+  <rect x="340" y="228" width="130" height="40" rx="6" fill="#fa8c16"/>
+  <text x="405" y="253" font-size="12" fill="#fff" text-anchor="middle">数据采集引擎</text>
+  <rect x="485" y="228" width="145" height="40" rx="6" fill="#fa8c16"/>
+  <text x="557" y="253" font-size="12" fill="#fff" text-anchor="middle">SFTP推送服务</text>
+
+  <polygon points="340,290 330,285 350,285" fill="#8c8c8c"/>
+  <line x1="340" y1="285" x2="340" y2="290" stroke="#8c8c8c" stroke-width="2"/>
+
+  <rect x="30" y="295" width="620" height="80" rx="8" fill="#f9f0ff" stroke="#722ed1" stroke-width="2"/>
+  <text x="50" y="315" font-size="13" fill="#722ed1" font-weight="bold">数据存储层</text>
+  <rect x="120" y="323" width="200" height="40" rx="6" fill="#722ed1"/>
+  <text x="220" y="343" font-size="13" fill="#fff" text-anchor="middle">MySQL</text>
+  <text x="220" y="358" font-size="10" fill="#e8d5ff" text-anchor="middle">业务数据</text>
+  <rect x="370" y="323" width="240" height="40" rx="6" fill="#722ed1"/>
+  <text x="490" y="343" font-size="13" fill="#fff" text-anchor="middle">Redis</text>
+  <text x="490" y="358" font-size="10" fill="#e8d5ff" text-anchor="middle">缓存 / 分布式锁</text>
+
+  <polygon points="340,385 330,380 350,380" fill="#8c8c8c"/>
+  <line x1="340" y1="380" x2="340" y2="385" stroke="#8c8c8c" stroke-width="2"/>
+
+  <rect x="30" y="390" width="620" height="80" rx="8" fill="#fff1f0" stroke="#f5222d" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="50" y="410" font-size="13" fill="#f5222d" font-weight="bold">外部系统</text>
+  <rect x="50" y="418" width="130" height="40" rx="6" fill="#f5222d"/>
+  <text x="115" y="443" font-size="12" fill="#fff" text-anchor="middle">CRM/工单系统</text>
+  <rect x="195" y="418" width="110" height="40" rx="6" fill="#f5222d"/>
+  <text x="250" y="443" font-size="12" fill="#fff" text-anchor="middle">网管系统</text>
+  <rect x="320" y="418" width="150" height="40" rx="6" fill="#f5222d"/>
+  <text x="395" y="443" font-size="12" fill="#fff" text-anchor="middle">资源中心SFTP</text>
+  <rect x="485" y="418" width="145" height="40" rx="6" fill="#f5222d"/>
+  <text x="557" y="443" font-size="12" fill="#fff" text-anchor="middle">认证中心</text>
+</svg>

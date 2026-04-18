@@ -1,0 +1,835 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+    @page { size: A4; margin: 2.54cm 3.18cm 2.54cm 3.18cm; }
+    body { font-family: "宋体", SimSun, serif; font-size: 12pt; line-height: 1.8; color: #000; }
+    h1 { font-family: "黑体", SimHei, sans-serif; font-size: 22pt; text-align: center; margin: 30pt 0 20pt 0; color: #000; }
+    h2 { font-family: "黑体", SimHei, sans-serif; font-size: 16pt; margin: 24pt 0 12pt 0; color: #000; border-bottom: 2px solid #333; padding-bottom: 6pt; }
+    h3 { font-family: "黑体", SimHei, sans-serif; font-size: 14pt; margin: 18pt 0 10pt 0; color: #000; }
+    h4 { font-family: "黑体", SimHei, sans-serif; font-size: 12pt; margin: 14pt 0 8pt 0; color: #000; }
+    p { margin: 6pt 0; text-indent: 2em; }
+    p.no-indent { text-indent: 0; }
+    table { border-collapse: collapse; width: 100%; margin: 10pt 0; font-size: 10.5pt; }
+    th, td { border: 1px solid #000; padding: 6pt 8pt; text-align: left; vertical-align: top; }
+    th { background: #e8e8e8; font-weight: bold; text-align: center; }
+    td { text-indent: 0; }
+    pre { font-family: "Courier New", Consolas, monospace; font-size: 9pt; background: #f5f5f5; padding: 10pt; border: 1px solid #ddd; margin: 10pt 0; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+    .cover { text-align: center; margin-top: 120pt; }
+    .cover h1 { font-size: 28pt; margin-bottom: 40pt; border: none; }
+    .cover-table { margin: 0 auto; border: none; width: 60%; }
+    .cover-table td { border: none; padding: 8pt 12pt; font-size: 14pt; }
+    .cover-table td:first-child { text-align: right; font-weight: bold; width: 35%; }
+    .toc { margin: 20pt 0; }
+    .toc a { text-decoration: none; color: #000; }
+    .toc-level1 { font-size: 14pt; font-weight: bold; margin: 12pt 0 6pt 0; }
+    .toc-level2 { font-size: 12pt; margin: 4pt 0 4pt 24pt; }
+    .toc-level3 { font-size: 11pt; margin: 2pt 0 2pt 48pt; }
+    .page-break { page-break-before: always; }
+    .center { text-align: center; }
+    .note { background: #fffbe6; border-left: 4px solid #faad14; padding: 8pt 12pt; margin: 10pt 0; font-size: 11pt; }
+    .code-label { font-weight: bold; margin: 10pt 0 4pt 0; font-size: 11pt; }
+</style>
+</head>
+<body>
+
+<!-- ==================== 封面 ==================== -->
+<div class="cover">
+    <h1>中国移动陕西公司IP地址管理系统<br/>详细设计文档</h1>
+    <table class="cover-table">
+        <tr><td>项目名称：</td><td>IP地址管理系统</td></tr>
+        <tr><td>项目编号：</td><td>com.cmcc.ip:ip-management-system:1.0.0-SNAPSHOT</td></tr>
+        <tr><td>文档版本：</td><td>V1.0</td></tr>
+        <tr><td>编写日期：</td><td>2026年4月10日</td></tr>
+        <tr><td>适用范围：</td><td>中国移动陕西公司</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== 目录 ==================== -->
+<h2>目 录</h2>
+<div class="toc">
+    <div class="toc-level1">1. 系统概述</div>
+    <div class="toc-level2">1.1 系统背景</div>
+    <div class="toc-level2">1.2 系统目标</div>
+    <div class="toc-level2">1.3 系统范围</div>
+    <div class="toc-level1">2. 系统架构设计</div>
+    <div class="toc-level2">2.1 总体架构</div>
+    <div class="toc-level2">2.2 技术架构</div>
+    <div class="toc-level2">2.3 包结构</div>
+    <div class="toc-level1">3. 数据库设计</div>
+    <div class="toc-level2">3.1 ER关系图</div>
+    <div class="toc-level2">3.2 表结构详细设计</div>
+    <div class="toc-level2">3.3 区域编码定义</div>
+    <div class="toc-level1">4. 接口设计</div>
+    <div class="toc-level2">4.1 统一响应格式</div>
+    <div class="toc-level2">4.2 地址分配管理接口</div>
+    <div class="toc-level2">4.3 资源查询接口</div>
+    <div class="toc-level2">4.4 数据采集接口</div>
+    <div class="toc-level1">5. 业务流程设计</div>
+    <div class="toc-level2">5.1 IP地址分配流程</div>
+    <div class="toc-level2">5.2 IP地址释放流程</div>
+    <div class="toc-level2">5.3 IP地址续约流程</div>
+    <div class="toc-level2">5.4 数据采集流程</div>
+    <div class="toc-level2">5.5 稽核数据生成与SFTP推送流程</div>
+    <div class="toc-level1">6. 核心类设计</div>
+    <div class="toc-level2">6.1 实体类</div>
+    <div class="toc-level2">6.2 服务类</div>
+    <div class="toc-level2">6.3 自定义SQL</div>
+    <div class="toc-level1">7. 非功能性设计</div>
+    <div class="toc-level1">8. 配置说明</div>
+    <div class="toc-level1">9. 部署架构</div>
+    <div class="toc-level1">10. 术语表</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== 正文 ==================== -->
+
+<h2>1. 系统概述</h2>
+
+<h3>1.1 系统背景</h3>
+<p>本系统面向中国移动陕西公司，用于管理全省公网/私网IP地址的全生命周期，包括地址池管理、IP地址分配与回收、设备数据采集、IP绑定管理、稽核数据生成与SFTP推送等功能。系统旨在实现IP地址资源的精细化、自动化管理，提升运维效率，保障地址资源合规使用。</p>
+
+<h3>1.2 系统目标</h3>
+<p class="no-indent">1. 实现IPv4/IPv6地址的统一管理和自动化分配</p>
+<p class="no-indent">2. 支持多区域（西安、咸阳、渭南等）地址资源的分级管理</p>
+<p class="no-indent">3. 提供地址全生命周期管理：分配 → 使用 → 续约 → 释放</p>
+<p class="no-indent">4. 实现设备自动采集与IP地址关联</p>
+<p class="no-indent">5. 定时稽核数据生成，并自动推送至资源中心SFTP服务器</p>
+<p class="no-indent">6. 提供多维度的资源查询与统计报表</p>
+
+<h3>1.3 系统范围</h3>
+<table>
+    <tr><th>领域</th><th>说明</th></tr>
+    <tr><td>地址资源管理</td><td>地址池CRUD、IP地址CRUD、批量导入导出</td></tr>
+    <tr><td>地址分配管理</td><td>自动/手动分配、释放、续约</td></tr>
+    <tr><td>设备管理</td><td>设备注册、数据采集、状态监控</td></tr>
+    <tr><td>IP绑定管理</td><td>静态/动态绑定、解绑</td></tr>
+    <tr><td>稽核管理</td><td>定时稽核、数据比对、SFTP推送</td></tr>
+    <tr><td>统计报表</td><td>使用率统计、趋势分析、区域分布</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>2. 系统架构设计</h2>
+
+<h3>2.1 总体架构</h3>
+<p>系统采用分层架构设计，自上而下分为：用户接入层、业务应用层、服务支撑层、数据存储层。</p>
+
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/系统总体架构图.svg" width="680" height="480" alt="系统总体架构图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图2-1 系统总体架构图</p>
+
+<h3>2.2 技术架构</h3>
+<table>
+    <tr><th>层次</th><th>技术选型</th><th>版本</th></tr>
+    <tr><td>开发框架</td><td>Spring Boot</td><td>2.7.14</td></tr>
+    <tr><td>ORM框架</td><td>MyBatis-Plus</td><td>3.5.3</td></tr>
+    <tr><td>数据库</td><td>MySQL / H2(开发)</td><td>8.0 / 2.x</td></tr>
+    <tr><td>缓存</td><td>Redis</td><td>-</td></tr>
+    <tr><td>构建工具</td><td>Maven</td><td>3.x</td></tr>
+    <tr><td>JDK</td><td>Java</td><td>1.8</td></tr>
+    <tr><td>序列化</td><td>FastJSON</td><td>2.0.32</td></tr>
+    <tr><td>工具库</td><td>Lombok, Commons-Lang3</td><td>-</td></tr>
+</table>
+
+<h3>2.3 包结构</h3>
+<pre>
+com.cmcc.ip.system
+├── common/                    # 通用类
+│   ├── Result.java           # 统一响应封装
+│   ├── AllocationRequest.java # 分配请求DTO
+│   └── AllocationResult.java  # 分配结果DTO
+├── config/                    # 配置类
+│   └── MybatisPlusConfig.java # MyBatis-Plus配置(分页/自动填充)
+├── controller/                # 控制器层
+│   ├── AllocationController.java  # 地址分配API
+│   ├── CollectionController.java  # 数据采集API
+│   └── ResourceController.java    # 资源查询API
+├── entity/                    # 实体层
+│   ├── AddressPool.java      # 地址池实体
+│   ├── Device.java           # 设备实体
+│   ├── IpAddress.java        # IP地址实体
+│   ├── IpAllocation.java     # 分配记录实体
+│   └── IpBinding.java        # 绑定关系实体
+├── mapper/                    # 数据访问层
+│   ├── AddressPoolMapper.java/.xml
+│   ├── DeviceMapper.java
+│   ├── IpAddressMapper.java/.xml
+│   ├── IpAllocationMapper.java/.xml
+│   └── IpBindingMapper.java
+├── service/                   # 业务逻辑层
+│   ├── AddressPoolService.java
+│   ├── DeviceService.java
+│   ├── IpAddressService.java
+│   ├── IpAllocationManageService.java
+│   └── IpAllocationService.java
+└── IpManagementSystemApplication.java  # 启动类
+</pre>
+
+<div class="page-break"></div>
+
+<h2>3. 数据库设计</h2>
+
+<h3>3.1 ER关系图</h3>
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/数据库ER关系图.svg" width="680" height="400" alt="数据库ER关系图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图3-1 数据库ER关系图</p>
+
+<h3>3.2 表结构详细设计</h3>
+
+<h4>3.2.1 地址池表（tb_address_pool）</h4>
+<table>
+    <tr><th>字段名</th><th>类型</th><th>是否必填</th><th>默认值</th><th>说明</th></tr>
+    <tr><td>id</td><td>BIGINT</td><td>PK, AUTO</td><td>-</td><td>主键ID</td></tr>
+    <tr><td>pool_name</td><td>VARCHAR(100)</td><td>NOT NULL</td><td>-</td><td>地址池名称</td></tr>
+    <tr><td>pool_code</td><td>VARCHAR(50)</td><td>NOT NULL, UK</td><td>-</td><td>地址池编码（唯一）</td></tr>
+    <tr><td>ip_type</td><td>TINYINT</td><td>-</td><td>1</td><td>地址类型：1-IPv4, 2-IPv6</td></tr>
+    <tr><td>start_address</td><td>VARCHAR(45)</td><td>NOT NULL</td><td>-</td><td>起始地址</td></tr>
+    <tr><td>end_address</td><td>VARCHAR(45)</td><td>NOT NULL</td><td>-</td><td>结束地址</td></tr>
+    <tr><td>total_count</td><td>INT</td><td>-</td><td>0</td><td>地址总数</td></tr>
+    <tr><td>available_count</td><td>INT</td><td>-</td><td>0</td><td>可用数量</td></tr>
+    <tr><td>region_code</td><td>VARCHAR(20)</td><td>-</td><td>NULL</td><td>所属区域编码（XIAN/XY/WN等）</td></tr>
+    <tr><td>allocation_strategy</td><td>TINYINT</td><td>-</td><td>1</td><td>分配策略：1-顺序分配, 2-随机分配</td></tr>
+    <tr><td>priority</td><td>INT</td><td>-</td><td>0</td><td>优先级（数值越小越优先）</td></tr>
+    <tr><td>status</td><td>TINYINT</td><td>-</td><td>1</td><td>状态：1-启用, 2-禁用</td></tr>
+    <tr><td>created_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP</td><td>创建时间</td></tr>
+    <tr><td>updated_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP ON UPDATE</td><td>更新时间</td></tr>
+</table>
+<p class="no-indent"><b>索引设计：</b></p>
+<table>
+    <tr><th>索引名</th><th>类型</th><th>字段</th></tr>
+    <tr><td>uk_pool_code</td><td>UNIQUE</td><td>pool_code</td></tr>
+    <tr><td>idx_ip_type</td><td>NORMAL</td><td>ip_type</td></tr>
+    <tr><td>idx_region_code</td><td>NORMAL</td><td>region_code</td></tr>
+    <tr><td>idx_priority</td><td>NORMAL</td><td>priority</td></tr>
+</table>
+
+<h4>3.2.2 IP地址表（tb_ip_address）</h4>
+<table>
+    <tr><th>字段名</th><th>类型</th><th>是否必填</th><th>默认值</th><th>说明</th></tr>
+    <tr><td>id</td><td>BIGINT</td><td>PK, AUTO</td><td>-</td><td>主键ID</td></tr>
+    <tr><td>ip_address</td><td>VARCHAR(45)</td><td>NOT NULL, UK</td><td>-</td><td>IP地址</td></tr>
+    <tr><td>ip_type</td><td>TINYINT</td><td>-</td><td>1</td><td>地址类型：1-IPv4, 2-IPv6</td></tr>
+    <tr><td>subnet_mask</td><td>VARCHAR(45)</td><td>-</td><td>NULL</td><td>子网掩码</td></tr>
+    <tr><td>prefix_length</td><td>TINYINT</td><td>-</td><td>NULL</td><td>前缀长度（IPv6）</td></tr>
+    <tr><td>gateway</td><td>VARCHAR(45)</td><td>-</td><td>NULL</td><td>网关地址</td></tr>
+    <tr><td>dns_primary</td><td>VARCHAR(45)</td><td>-</td><td>NULL</td><td>主DNS</td></tr>
+    <tr><td>dns_secondary</td><td>VARCHAR(45)</td><td>-</td><td>NULL</td><td>辅DNS</td></tr>
+    <tr><td>address_pool_id</td><td>BIGINT</td><td>-</td><td>NULL</td><td>所属地址池ID（FK→tb_address_pool）</td></tr>
+    <tr><td>status</td><td>TINYINT</td><td>-</td><td>1</td><td>状态：1-未分配, 2-已分配, 3-预留, 4-冻结</td></tr>
+    <tr><td>region_code</td><td>VARCHAR(20)</td><td>-</td><td>NULL</td><td>所属区域编码</td></tr>
+    <tr><td>device_id</td><td>BIGINT</td><td>-</td><td>NULL</td><td>关联设备ID（FK→tb_device）</td></tr>
+    <tr><td>created_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP</td><td>创建时间</td></tr>
+    <tr><td>updated_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP ON UPDATE</td><td>更新时间</td></tr>
+</table>
+<p class="no-indent"><b>索引设计：</b></p>
+<table>
+    <tr><th>索引名</th><th>类型</th><th>字段</th></tr>
+    <tr><td>uk_ip_address</td><td>UNIQUE</td><td>ip_address</td></tr>
+    <tr><td>idx_address_pool_id</td><td>NORMAL</td><td>address_pool_id</td></tr>
+    <tr><td>idx_status</td><td>NORMAL</td><td>status</td></tr>
+    <tr><td>idx_region_code</td><td>NORMAL</td><td>region_code</td></tr>
+</table>
+
+<h4>3.2.3 IP分配记录表（tb_ip_allocation）</h4>
+<table>
+    <tr><th>字段名</th><th>类型</th><th>是否必填</th><th>默认值</th><th>说明</th></tr>
+    <tr><td>id</td><td>BIGINT</td><td>PK, AUTO</td><td>-</td><td>主键ID</td></tr>
+    <tr><td>ip_address_id</td><td>BIGINT</td><td>NOT NULL</td><td>-</td><td>IP地址ID（FK→tb_ip_address）</td></tr>
+    <tr><td>ip_address</td><td>VARCHAR(45)</td><td>NOT NULL</td><td>-</td><td>IP地址（冗余字段）</td></tr>
+    <tr><td>address_pool_id</td><td>BIGINT</td><td>-</td><td>NULL</td><td>地址池ID（FK→tb_address_pool）</td></tr>
+    <tr><td>allocation_type</td><td>TINYINT</td><td>-</td><td>1</td><td>分配类型：1-自动分配, 2-手动分配</td></tr>
+    <tr><td>subscriber_id</td><td>VARCHAR(50)</td><td>-</td><td>NULL</td><td>客户ID</td></tr>
+    <tr><td>service_order_id</td><td>VARCHAR(50)</td><td>-</td><td>NULL</td><td>业务工单ID</td></tr>
+    <tr><td>allocation_time</td><td>DATETIME</td><td>-</td><td>NULL</td><td>分配时间</td></tr>
+    <tr><td>expiration_time</td><td>DATETIME</td><td>-</td><td>NULL</td><td>到期时间</td></tr>
+    <tr><td>release_time</td><td>DATETIME</td><td>-</td><td>NULL</td><td>释放时间</td></tr>
+    <tr><td>release_type</td><td>TINYINT</td><td>-</td><td>NULL</td><td>释放类型：1-到期释放, 2-主动释放</td></tr>
+    <tr><td>status</td><td>TINYINT</td><td>-</td><td>1</td><td>状态：1-使用中, 2-已释放</td></tr>
+    <tr><td>operator_id</td><td>VARCHAR(30)</td><td>-</td><td>NULL</td><td>操作员ID</td></tr>
+    <tr><td>created_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP</td><td>创建时间</td></tr>
+</table>
+<p class="no-indent"><b>索引设计：</b></p>
+<table>
+    <tr><th>索引名</th><th>类型</th><th>字段</th></tr>
+    <tr><td>idx_ip_address_id</td><td>NORMAL</td><td>ip_address_id</td></tr>
+    <tr><td>idx_subscriber_id</td><td>NORMAL</td><td>subscriber_id</td></tr>
+    <tr><td>idx_service_order_id</td><td>NORMAL</td><td>service_order_id</td></tr>
+    <tr><td>idx_allocation_time</td><td>NORMAL</td><td>allocation_time</td></tr>
+    <tr><td>idx_status</td><td>NORMAL</td><td>status</td></tr>
+</table>
+
+<h4>3.2.4 设备表（tb_device）</h4>
+<table>
+    <tr><th>字段名</th><th>类型</th><th>是否必填</th><th>默认值</th><th>说明</th></tr>
+    <tr><td>id</td><td>BIGINT</td><td>PK, AUTO</td><td>-</td><td>主键ID</td></tr>
+    <tr><td>device_name</td><td>VARCHAR(100)</td><td>NOT NULL</td><td>-</td><td>设备名称</td></tr>
+    <tr><td>device_code</td><td>VARCHAR(50)</td><td>NOT NULL, UK</td><td>-</td><td>设备编码（唯一）</td></tr>
+    <tr><td>device_type</td><td>VARCHAR(30)</td><td>-</td><td>NULL</td><td>设备类型：OLT/BRAS/交换机等</td></tr>
+    <tr><td>device_ip</td><td>VARCHAR(45)</td><td>-</td><td>NULL</td><td>设备管理IP地址</td></tr>
+    <tr><td>vendor</td><td>VARCHAR(50)</td><td>-</td><td>NULL</td><td>设备厂商</td></tr>
+    <tr><td>region_code</td><td>VARCHAR(20)</td><td>-</td><td>NULL</td><td>所属区域编码</td></tr>
+    <tr><td>status</td><td>TINYINT</td><td>-</td><td>2</td><td>状态：1-在线, 2-离线</td></tr>
+    <tr><td>last_collection_time</td><td>DATETIME</td><td>-</td><td>NULL</td><td>最后采集时间</td></tr>
+    <tr><td>created_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP</td><td>创建时间</td></tr>
+    <tr><td>updated_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP ON UPDATE</td><td>更新时间</td></tr>
+</table>
+
+<h4>3.2.5 地址绑定关系表（tb_ip_binding）</h4>
+<table>
+    <tr><th>字段名</th><th>类型</th><th>是否必填</th><th>默认值</th><th>说明</th></tr>
+    <tr><td>id</td><td>BIGINT</td><td>PK, AUTO</td><td>-</td><td>主键ID</td></tr>
+    <tr><td>ip_address_id</td><td>BIGINT</td><td>NOT NULL</td><td>-</td><td>IP地址ID（FK→tb_ip_address）</td></tr>
+    <tr><td>ip_address</td><td>VARCHAR(45)</td><td>NOT NULL</td><td>-</td><td>IP地址（冗余字段）</td></tr>
+    <tr><td>device_id</td><td>BIGINT</td><td>NOT NULL</td><td>-</td><td>设备ID（FK→tb_device）</td></tr>
+    <tr><td>binding_type</td><td>TINYINT</td><td>-</td><td>1</td><td>绑定类型：1-静态绑定, 2-动态绑定</td></tr>
+    <tr><td>binding_time</td><td>DATETIME</td><td>-</td><td>NULL</td><td>绑定时间</td></tr>
+    <tr><td>unbinding_time</td><td>DATETIME</td><td>-</td><td>NULL</td><td>解绑时间</td></tr>
+    <tr><td>status</td><td>TINYINT</td><td>-</td><td>1</td><td>状态：1-已绑定, 2-已解绑</td></tr>
+    <tr><td>created_time</td><td>DATETIME</td><td>-</td><td>CURRENT_TIMESTAMP</td><td>创建时间</td></tr>
+</table>
+
+<h3>3.3 区域编码定义</h3>
+<table>
+    <tr><th>编码</th><th>名称</th><th>说明</th></tr>
+    <tr><td>XIAN</td><td>西安市</td><td>省会城市，主要业务区域</td></tr>
+    <tr><td>XY</td><td>咸阳市</td><td>地级市</td></tr>
+    <tr><td>WN</td><td>渭南市</td><td>地级市</td></tr>
+    <tr><td>BJ</td><td>宝鸡市</td><td>地级市</td></tr>
+    <tr><td>TC</td><td>铜川市</td><td>地级市</td></tr>
+    <tr><td>HZ</td><td>汉中市</td><td>地级市</td></tr>
+    <tr><td>AK</td><td>安康市</td><td>地级市</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>4. 接口设计</h2>
+
+<h3>4.1 统一响应格式</h3>
+<pre>
+{
+    "code": 200,
+    "message": "成功",
+    "data": {}
+}
+</pre>
+<table>
+    <tr><th>code</th><th>说明</th></tr>
+    <tr><td>200</td><td>成功</td></tr>
+    <tr><td>201</td><td>部分成功</td></tr>
+    <tr><td>400</td><td>参数错误</td></tr>
+    <tr><td>404</td><td>资源不存在</td></tr>
+    <tr><td>500</td><td>系统错误</td></tr>
+</table>
+
+<h3>4.2 地址分配管理接口（AllocationController）</h3>
+<p class="no-indent"><b>基础路径：</b>/api/v1/allocation</p>
+
+<h4>4.2.1 IP地址分配</h4>
+<p class="no-indent"><b>URL：</b>POST /api/v1/allocation/allocate</p>
+<p class="no-indent"><b>请求参数（Body - JSON）：</b></p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr>
+    <tr><td>ipType</td><td>Integer</td><td>是</td><td>地址类型：1-IPv4, 2-IPv6</td></tr>
+    <tr><td>regionCode</td><td>String</td><td>否</td><td>区域编码</td></tr>
+    <tr><td>subscriberId</td><td>String</td><td>否</td><td>客户ID</td></tr>
+    <tr><td>serviceOrderId</td><td>String</td><td>否</td><td>业务工单号</td></tr>
+    <tr><td>allocationType</td><td>Integer</td><td>否</td><td>分配类型：1-自动（默认）, 2-手动</td></tr>
+    <tr><td>requireCount</td><td>Integer</td><td>是</td><td>需求数量（>0）</td></tr>
+    <tr><td>expireDays</td><td>Integer</td><td>否</td><td>有效天数</td></tr>
+    <tr><td>operatorId</td><td>String</td><td>否</td><td>操作员ID</td></tr>
+</table>
+<p class="no-indent"><b>响应参数：</b></p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+    <tr><td>code</td><td>Integer</td><td>200-全部成功, 201-部分成功, 400-无可用地址池</td></tr>
+    <tr><td>message</td><td>String</td><td>结果描述</td></tr>
+    <tr><td>allocationList</td><td>Array</td><td>分配结果列表</td></tr>
+    <tr><td>allocationList[].ipAddress</td><td>String</td><td>分配的IP地址</td></tr>
+    <tr><td>allocationList[].addressPoolId</td><td>Long</td><td>所属地址池ID</td></tr>
+    <tr><td>allocationList[].allocationId</td><td>Long</td><td>分配记录ID</td></tr>
+</table>
+
+<h4>4.2.2 IP地址释放</h4>
+<p class="no-indent"><b>URL：</b>POST /api/v1/allocation/release</p>
+<p class="no-indent"><b>请求参数（Query）：</b></p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr>
+    <tr><td>allocationId</td><td>Long</td><td>是</td><td>分配记录ID</td></tr>
+    <tr><td>releaseType</td><td>Integer</td><td>否</td><td>释放类型：1-到期释放, 2-主动释放（默认2）</td></tr>
+</table>
+
+<h4>4.2.3 IP地址续约</h4>
+<p class="no-indent"><b>URL：</b>POST /api/v1/allocation/renew</p>
+<p class="no-indent"><b>请求参数（Query）：</b></p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr>
+    <tr><td>allocationId</td><td>Long</td><td>是</td><td>分配记录ID</td></tr>
+    <tr><td>extendDays</td><td>Integer</td><td>是</td><td>续约天数（>0）</td></tr>
+</table>
+
+<h3>4.3 资源查询接口（ResourceController）</h3>
+<p class="no-indent"><b>基础路径：</b>/api/v1/resource</p>
+
+<h4>4.3.1 IP地址查询</h4>
+<p class="no-indent"><b>URL：</b>GET /api/v1/resource/ip-address</p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>必填</th><th>默认值</th><th>说明</th></tr>
+    <tr><td>ipAddress</td><td>String</td><td>否</td><td>-</td><td>IP地址（精确匹配）</td></tr>
+    <tr><td>ipType</td><td>Integer</td><td>否</td><td>-</td><td>地址类型</td></tr>
+    <tr><td>addressPoolId</td><td>Long</td><td>否</td><td>-</td><td>地址池ID</td></tr>
+    <tr><td>status</td><td>Integer</td><td>否</td><td>-</td><td>状态</td></tr>
+    <tr><td>regionCode</td><td>String</td><td>否</td><td>-</td><td>区域编码</td></tr>
+    <tr><td>pageNum</td><td>Integer</td><td>否</td><td>1</td><td>页码</td></tr>
+    <tr><td>pageSize</td><td>Integer</td><td>否</td><td>20</td><td>每页条数</td></tr>
+</table>
+
+<h4>4.3.2 IP地址批量查询</h4>
+<p class="no-indent"><b>URL：</b>POST /api/v1/resource/ip-address/batch</p>
+<p class="no-indent"><b>请求参数：</b>JSON数组，如 ["218.201.1.10", "10.0.1.50"]</p>
+
+<h4>4.3.3 地址池查询</h4>
+<p class="no-indent"><b>URL：</b>GET /api/v1/resource/address-pool</p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>必填</th><th>默认值</th><th>说明</th></tr>
+    <tr><td>poolCode</td><td>String</td><td>否</td><td>-</td><td>地址池编码</td></tr>
+    <tr><td>ipType</td><td>Integer</td><td>否</td><td>-</td><td>地址类型</td></tr>
+    <tr><td>regionCode</td><td>String</td><td>否</td><td>-</td><td>区域编码</td></tr>
+    <tr><td>status</td><td>Integer</td><td>否</td><td>-</td><td>状态</td></tr>
+    <tr><td>pageNum</td><td>Integer</td><td>否</td><td>1</td><td>页码</td></tr>
+    <tr><td>pageSize</td><td>Integer</td><td>否</td><td>20</td><td>每页条数</td></tr>
+</table>
+
+<h3>4.4 数据采集接口（CollectionController）</h3>
+<p class="no-indent"><b>基础路径：</b>/api/v1/collection</p>
+
+<h4>4.4.1 接收采集数据</h4>
+<p class="no-indent"><b>URL：</b>POST /api/v1/collection/receive</p>
+<p class="no-indent"><b>请求参数（Body - JSON）：</b></p>
+<pre>
+{
+    "deviceCode": "OLT-XA-001",
+    "ipList": [
+        {
+            "ipAddress": "218.201.1.10",
+            "ipType": 1,
+            "subnetMask": "255.255.255.0",
+            "gateway": "218.201.1.1",
+            "regionCode": "XIAN",
+            "status": 2
+        }
+    ]
+}
+</pre>
+<p class="no-indent"><b>响应参数：</b></p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+    <tr><td>receivedCount</td><td>Integer</td><td>成功接收数量</td></tr>
+    <tr><td>failList</td><td>Array</td><td>失败列表</td></tr>
+    <tr><td>failList[].ipAddress</td><td>String</td><td>失败的IP地址</td></tr>
+    <tr><td>failList[].reason</td><td>String</td><td>失败原因</td></tr>
+</table>
+
+<h4>4.4.2 设备注册</h4>
+<p class="no-indent"><b>URL：</b>POST /api/v1/collection/device/register</p>
+<p class="no-indent"><b>请求参数（Body - JSON）：</b></p>
+<pre>
+{
+    "deviceName": "西安OLT-001",
+    "deviceCode": "OLT-XA-001",
+    "deviceType": "OLT",
+    "deviceIp": "10.255.0.1",
+    "vendor": "华为",
+    "regionCode": "XIAN"
+}
+</pre>
+
+<h4>4.4.3 查询采集状态</h4>
+<p class="no-indent"><b>URL：</b>GET /api/v1/collection/status/{deviceCode}</p>
+<p class="no-indent"><b>响应参数：</b></p>
+<table>
+    <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+    <tr><td>deviceCode</td><td>String</td><td>设备编码</td></tr>
+    <tr><td>lastCollectionTime</td><td>Date</td><td>最后采集时间</td></tr>
+    <tr><td>collectionStatus</td><td>Integer</td><td>设备状态</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>5. 业务流程设计</h2>
+
+<h3>5.1 IP地址分配流程</h3>
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/IP地址分配流程图.svg" width="680" height="780" alt="IP地址分配流程图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图5-1 IP地址分配流程图</p>
+<div class="note">事务控制：整个分配过程在同一事务中执行（@Transactional），任何步骤失败则全部回滚。</div>
+
+<h3>5.2 IP地址释放流程</h3>
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/IP地址释放流程图.svg" width="600" height="640" alt="IP地址释放流程图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图5-2 IP地址释放流程图</p>
+
+<h3>5.3 IP地址续约流程</h3>
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/IP地址续约流程图.svg" width="520" height="380" alt="IP地址续约流程图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图5-3 IP地址续约流程图</p>
+
+<h3>5.4 数据采集流程</h3>
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/数据采集流程图.svg" width="620" height="560" alt="数据采集流程图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图5-4 数据采集流程图</p>
+
+<h3>5.5 稽核数据生成与SFTP推送流程</h3>
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/稽核数据生成与SFTP推送流程图.svg" width="680" height="780" alt="稽核数据生成与SFTP推送流程图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图5-5 稽核数据生成与SFTP推送流程图</p>
+
+<div class="page-break"></div>
+
+<h2>6. 核心类设计</h2>
+
+<h3>6.1 实体类</h3>
+
+<h4>IpAddress</h4>
+<pre>
+@TableName("tb_ip_address")
+public class IpAddress {
+    private Long id;              // 主键
+    private String ipAddress;     // IP地址
+    private Integer ipType;       // 类型：1-IPv4, 2-IPv6
+    private String subnetMask;    // 子网掩码
+    private Integer prefixLength; // 前缀长度
+    private String gateway;       // 网关
+    private String dnsPrimary;    // 主DNS
+    private String dnsSecondary;  // 辅DNS
+    private Long addressPoolId;   // 地址池ID
+    private Integer status;       // 状态：1-未分配,2-已分配,3-预留,4-冻结
+    private String regionCode;    // 区域编码
+    private Long deviceId;        // 设备ID
+    private Date createdTime;     // 创建时间（自动填充）
+    private Date updatedTime;     // 更新时间（自动填充）
+
+    enum IpType { IPv4(1), IPv6(2) }
+    enum Status { UNASSIGNED(1), ASSIGNED(2), RESERVED(3), FROZEN(4) }
+}
+</pre>
+
+<h4>AddressPool</h4>
+<pre>
+@TableName("tb_address_pool")
+public class AddressPool {
+    private Long id;
+    private String poolName;            // 地址池名称
+    private String poolCode;            // 编码（唯一）
+    private Integer ipType;             // 1-IPv4, 2-IPv6
+    private String startAddress;        // 起始地址
+    private String endAddress;          // 结束地址
+    private Integer totalCount;         // 总数
+    private Integer availableCount;     // 可用数
+    private String regionCode;          // 区域编码
+    private Integer allocationStrategy; // 1-顺序, 2-随机
+    private Integer priority;           // 优先级（数值越小越优先）
+    private Integer status;             // 1-启用, 2-禁用
+
+    enum AllocationStrategy { SEQUENTIAL(1), RANDOM(2) }
+    enum PoolStatus { ENABLED(1), DISABLED(2) }
+}
+</pre>
+
+<h4>IpAllocation</h4>
+<pre>
+@TableName("tb_ip_allocation")
+public class IpAllocation {
+    private Long id;
+    private Long ipAddressId;       // IP地址ID
+    private String ipAddress;       // IP地址（冗余）
+    private Long addressPoolId;     // 地址池ID
+    private Integer allocationType; // 1-自动, 2-手动
+    private String subscriberId;    // 客户ID
+    private String serviceOrderId;  // 工单号
+    private Date allocationTime;    // 分配时间
+    private Date expirationTime;    // 到期时间
+    private Date releaseTime;       // 释放时间
+    private Integer releaseType;    // 1-到期释放, 2-主动释放
+    private Integer status;         // 1-使用中, 2-已释放
+    private String operatorId;      // 操作员
+
+    enum AllocationType { AUTO(1), MANUAL(2) }
+    enum ReleaseType { EXPIRE(1), MANUAL(2) }
+    enum AllocationStatus { IN_USE(1), RELEASED(2) }
+}
+</pre>
+
+<h4>Device</h4>
+<pre>
+@TableName("tb_device")
+public class Device {
+    private Long id;
+    private String deviceName;          // 设备名称
+    private String deviceCode;          // 编码（唯一）
+    private String deviceType;          // OLT/BRAS/交换机
+    private String deviceIp;            // 管理IP
+    private String vendor;              // 厂商
+    private String regionCode;          // 区域
+    private Integer status;             // 1-在线, 2-离线
+    private Date lastCollectionTime;    // 最后采集时间
+
+    enum DeviceStatus { ONLINE(1), OFFLINE(2) }
+}
+</pre>
+
+<h4>IpBinding</h4>
+<pre>
+@TableName("tb_ip_binding")
+public class IpBinding {
+    private Long id;
+    private Long ipAddressId;       // IP地址ID
+    private String ipAddress;       // IP地址（冗余）
+    private Long deviceId;          // 设备ID
+    private Integer bindingType;    // 1-静态, 2-动态
+    private Date bindingTime;       // 绑定时间
+    private Date unbindingTime;     // 解绑时间
+    private Integer status;         // 1-已绑定, 2-已解绑
+
+    enum BindingType { STATIC(1), DYNAMIC(2) }
+    enum BindingStatus { BOUND(1), UNBOUND(2) }
+}
+</pre>
+
+<h3>6.2 服务类</h3>
+
+<h4>IpAllocationManageService（核心业务编排）</h4>
+<table>
+    <tr><th>方法</th><th>说明</th><th>事务</th></tr>
+    <tr><td>allocate(AllocationRequest)</td><td>按优先级遍历地址池，批量分配IP</td><td>@Transactional</td></tr>
+    <tr><td>release(Long, Integer)</td><td>释放IP，恢复地址池可用数</td><td>@Transactional</td></tr>
+    <tr><td>renew(Long, Integer)</td><td>延长分配到期时间</td><td>@Transactional</td></tr>
+</table>
+
+<h4>AddressPoolService</h4>
+<table>
+    <tr><th>方法</th><th>说明</th></tr>
+    <tr><td>queryList(query, pageNum, pageSize)</td><td>分页查询地址池</td></tr>
+    <tr><td>getById(Long)</td><td>按ID查询</td></tr>
+    <tr><td>getByPoolCode(String)</td><td>按编码查询</td></tr>
+    <tr><td>selectByPriority(ipType, regionCode, status)</td><td>按优先级排序查询</td></tr>
+    <tr><td>save(AddressPool)</td><td>新增地址池</td></tr>
+    <tr><td>update(AddressPool)</td><td>更新地址池</td></tr>
+    <tr><td>updateAvailableCount(Long id, Integer count)</td><td>更新可用数量（原子操作）</td></tr>
+</table>
+
+<h4>IpAddressService</h4>
+<table>
+    <tr><th>方法</th><th>说明</th></tr>
+    <tr><td>queryList(query, pageNum, pageSize)</td><td>分页查询IP地址</td></tr>
+    <tr><td>getById(Long)</td><td>按ID查询</td></tr>
+    <tr><td>getByIpAddress(String)</td><td>按IP地址查询</td></tr>
+    <tr><td>selectAvailableList(ipType, regionCode, poolId, limit)</td><td>查询可用IP列表</td></tr>
+    <tr><td>save(IpAddress)</td><td>新增IP</td></tr>
+    <tr><td>update(IpAddress)</td><td>更新IP</td></tr>
+    <tr><td>updateStatusBatch(List&lt;Long&gt; ids, Integer status)</td><td>批量更新状态</td></tr>
+</table>
+
+<h4>IpAllocationService</h4>
+<table>
+    <tr><th>方法</th><th>说明</th></tr>
+    <tr><td>queryList(query, pageNum, pageSize)</td><td>分页查询分配记录</td></tr>
+    <tr><td>getById(Long)</td><td>按ID查询</td></tr>
+    <tr><td>selectBySubscriberId(String)</td><td>按客户ID查询</td></tr>
+    <tr><td>selectByServiceOrderId(String)</td><td>按工单号查询</td></tr>
+    <tr><td>selectActiveBySubscriberId(String)</td><td>查询客户的有效分配</td></tr>
+    <tr><td>save(IpAllocation)</td><td>新增分配记录</td></tr>
+    <tr><td>release(Long, Integer)</td><td>释放</td></tr>
+    <tr><td>renew(Long, Integer)</td><td>续约</td></tr>
+</table>
+
+<h4>DeviceService</h4>
+<table>
+    <tr><th>方法</th><th>说明</th></tr>
+    <tr><td>queryList(Device)</td><td>条件查询设备</td></tr>
+    <tr><td>getById(Long)</td><td>按ID查询</td></tr>
+    <tr><td>getByDeviceCode(String)</td><td>按编码查询</td></tr>
+    <tr><td>save(Device)</td><td>新增设备</td></tr>
+    <tr><td>update(Device)</td><td>更新设备</td></tr>
+    <tr><td>updateCollectionTime(String)</td><td>更新采集时间</td></tr>
+</table>
+
+<h3>6.3 自定义SQL（Mapper XML）</h3>
+
+<h4>AddressPoolMapper.xml</h4>
+<pre>
+-- 按优先级查询可用地址池
+SELECT * FROM tb_address_pool
+WHERE 1=1
+  AND ip_type = #{ipType}
+  AND region_code = #{regionCode}
+  AND status = #{status}
+ORDER BY priority ASC
+
+-- 原子更新可用数量
+UPDATE tb_address_pool
+SET available_count = available_count + #{count}
+WHERE id = #{id}
+</pre>
+
+<h4>IpAddressMapper.xml</h4>
+<pre>
+-- 查询可用IP列表
+SELECT * FROM tb_ip_address
+WHERE status = 1
+  AND ip_type = #{ipType}
+  AND region_code = #{regionCode}
+  AND address_pool_id = #{addressPoolId}
+LIMIT #{limitCount}
+
+-- 批量更新状态
+UPDATE tb_ip_address
+SET status = #{status}, updated_time = NOW()
+WHERE id IN (#{ids})
+</pre>
+
+<h4>IpAllocationMapper.xml</h4>
+<pre>
+-- 按客户ID查询
+SELECT * FROM tb_ip_allocation WHERE subscriber_id = #{subscriberId}
+
+-- 按工单号查询
+SELECT * FROM tb_ip_allocation WHERE service_order_id = #{serviceOrderId}
+
+-- 查询客户有效分配
+SELECT * FROM tb_ip_allocation
+WHERE subscriber_id = #{subscriberId} AND status = 1
+</pre>
+
+<div class="page-break"></div>
+
+<h2>7. 非功能性设计</h2>
+
+<h3>7.1 事务管理</h3>
+<table>
+    <tr><th>操作</th><th>事务范围</th><th>说明</th></tr>
+    <tr><td>IP分配</td><td>@Transactional</td><td>分配IP+创建记录+更新池计数，原子操作</td></tr>
+    <tr><td>IP释放</td><td>@Transactional</td><td>释放记录+恢复IP状态+恢复池计数，原子操作</td></tr>
+    <tr><td>IP续约</td><td>@Transactional</td><td>更新到期时间</td></tr>
+    <tr><td>采集数据接收</td><td>@Transactional</td><td>批量更新/插入IP+更新采集时间</td></tr>
+</table>
+
+<h3>7.2 并发控制</h3>
+<p class="no-indent"><b>地址池可用数量更新：</b>使用SQL原子操作 available_count = available_count + #{count}，避免超分配</p>
+<p class="no-indent"><b>IP分配：</b>建议在获取可用IP时加分布式锁（Redis），防止同一IP被并发分配</p>
+<p class="no-indent"><b>到期释放：</b>定时任务扫描到期未释放记录，建议使用数据库行级锁</p>
+
+<h3>7.3 性能设计</h3>
+<table>
+    <tr><th>场景</th><th>策略</th></tr>
+    <tr><td>IP地址查询</td><td>分页查询 + 组合索引</td></tr>
+    <tr><td>可用IP检索</td><td>status索引 + LIMIT限制</td></tr>
+    <tr><td>地址池优先级排序</td><td>priority索引</td></tr>
+    <tr><td>大批量采集数据</td><td>分批提交，单条失败不影响整体</td></tr>
+    <tr><td>统计报表</td><td>建议定时物化统计数据，避免实时聚合</td></tr>
+</table>
+
+<h3>7.4 安全设计</h3>
+<p class="no-indent">1. API网关统一认证鉴权</p>
+<p class="no-indent">2. 操作员ID记录（operator_id字段）</p>
+<p class="no-indent">3. 审计日志记录关键操作</p>
+<p class="no-indent">4. SFTP密钥认证</p>
+
+<h3>7.5 可靠性设计</h3>
+<p class="no-indent">1. SFTP推送失败自动重试（最多3次）</p>
+<p class="no-indent">2. 稽核任务失败告警</p>
+<p class="no-indent">3. 数据库事务保障数据一致性</p>
+<p class="no-indent">4. MyBatis-Plus自动填充时间字段</p>
+
+<div class="page-break"></div>
+
+<h2>8. 配置说明</h2>
+
+<h3>8.1 应用配置（application.yml）</h3>
+<pre>
+server:
+  port: 8080                          # 服务端口
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver  # 开发环境使用H2内存数据库
+    url: jdbc:h2:mem:ip_management    # 生产环境切换为MySQL
+  h2:
+    console:
+      enabled: true                   # H2控制台（仅开发环境）
+  sql:
+    init:
+      mode: always                    # 启动时执行初始化SQL
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.cmcc.ip.system.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+</pre>
+
+<h3>8.2 生产环境配置建议</h3>
+<pre>
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ip_management?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+    password: ${REDIS_PASSWORD}
+</pre>
+
+<div class="page-break"></div>
+
+<h2>9. 部署架构</h2>
+<div class="diagram" style="text-align:center;margin:16pt 0;">
+<img src="images/部署架构图.svg" width="520" height="480" alt="部署架构图"/>
+</div>
+<p style="text-align:center;font-size:11pt;color:#595959;margin-top:6pt;">图9-1 部署架构图</p>
+
+<div class="page-break"></div>
+
+<h2>10. 术语表</h2>
+<table>
+    <tr><th>术语</th><th>说明</th></tr>
+    <tr><td>地址池（Address Pool）</td><td>一组连续IP地址的集合，用于IP分配</td></tr>
+    <tr><td>OLT</td><td>光线路终端（Optical Line Terminal）</td></tr>
+    <tr><td>BRAS</td><td>宽带远程接入服务器（Broadband Remote Access Server）</td></tr>
+    <tr><td>稽核（Audit）</td><td>对IP地址使用情况进行校验和比对</td></tr>
+    <tr><td>SFTP</td><td>安全文件传输协议（SSH File Transfer Protocol）</td></tr>
+    <tr><td>region_code</td><td>区域编码，标识IP/设备所属行政区域</td></tr>
+    <tr><td>分配策略</td><td>地址池的IP分配方式：顺序或随机</td></tr>
+    <tr><td>优先级</td><td>地址池的分配优先顺序，数值越小越优先分配</td></tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 720" width="680" height="720">
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#595959"/>
+    </marker>
+    <marker id="arrowRed2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Microsoft YaHei", "SimHei", sans-serif; font-size: 13px; fill: #333; }
+    .title { font-size: 18px; font-weight: bold; fill: #1a1a2e; }
+    .start-end { fill: #1a1a2e; }
+    .process { fill: #e8f4fd; stroke: #2196F3; stroke-width: 1.5; rx: 6; }
+    .process text { fill: #1565C0; }
+    .decision { fill: #fff3e0; stroke: #FF9800; stroke-width: 1.5; }
+    .decision text { fill: #E65100; font-size: 12px; }
+    .error { fill: #ffebee; stroke: #e74c3c; stroke-width: 1.5; rx: 6; }
+    .error text { fill: #c62828; }
+    .success { fill: #e8f5e9; stroke: #4CAF50; stroke-width: 1.5; rx: 6; }
+    .success text { fill: #2E7D32; }
+    .sub-step { fill: #f3e5f5; stroke: #9C27B0; stroke-width: 1; rx: 4; }
+    .sub-step text { fill: #6A1B9A; font-size: 12px; }
+    .label-no { font-size: 11px; fill: #e74c3c; font-weight: bold; }
+    .label-yes { font-size: 11px; fill: #4CAF50; font-weight: bold; }
+  </style>
+
+  <text x="340" y="30" text-anchor="middle" class="title">IP地址释放流程</text>
+
+  <!-- Start -->
+  <ellipse cx="340" cy="65" rx="90" ry="22" fill="#1a1a2e"/>
+  <text x="340" y="70" text-anchor="middle" fill="#fff" font-size="13">接收释放请求</text>
+
+  <line x1="340" y1="87" x2="340" y2="112" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- Query allocation -->
+  <rect x="220" y="115" width="240" height="40" class="process" rx="6"/>
+  <text x="340" y="140" text-anchor="middle">查询分配记录</text>
+
+  <line x1="340" y1="155" x2="340" y2="180" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- Decision: record exists? -->
+  <polygon points="340,183 420,218 340,253 260,218" class="decision"/>
+  <text x="340" y="222" text-anchor="middle" class="decision">记录存在?</text>
+
+  <!-- No → 404 -->
+  <line x1="260" y1="218" x2="130" y2="218" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed2)"/>
+  <text x="200" y="210" class="label-no">不存在</text>
+  <rect x="20" y="200" width="110" height="36" class="error" rx="6"/>
+  <text x="75" y="223" text-anchor="middle">返回404</text>
+
+  <!-- Yes → Decision: already released? -->
+  <line x1="340" y1="253" x2="340" y2="280" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <text x="355" y="270" class="label-yes">存在</text>
+
+  <polygon points="340,283 430,318 340,353 250,318" class="decision"/>
+  <text x="340" y="322" text-anchor="middle" class="decision">已释放?</text>
+
+  <!-- Yes → 400 -->
+  <line x1="250" y1="318" x2="130" y2="318" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed2)"/>
+  <text x="200" y="310" class="label-no">已释放</text>
+  <rect x="10" y="300" width="120" height="36" class="error" rx="6"/>
+  <text x="70" y="323" text-anchor="middle">返回400"地址已释放"</text>
+
+  <!-- No → Update -->
+  <line x1="340" y1="353" x2="340" y2="378" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <text x="355" y="370" class="label-yes">使用中</text>
+
+  <!-- Update allocation record -->
+  <rect x="190" y="381" width="300" height="70" class="sub-step" rx="4"/>
+  <text x="340" y="401" text-anchor="middle">更新分配记录：</text>
+  <text x="340" y="418" text-anchor="middle">status → 2（已释放）</text>
+  <text x="340" y="435" text-anchor="middle">release_time → 当前时间, release_type → 指定类型</text>
+
+  <line x1="340" y1="451" x2="340" y2="478" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- Query associated IP -->
+  <rect x="220" y="481" width="240" height="40" class="process" rx="6"/>
+  <text x="340" y="506" text-anchor="middle">查询关联IP地址</text>
+
+  <line x1="340" y1="521" x2="340" y2="548" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- Update IP status -->
+  <rect x="190" y="551" width="300" height="40" class="process" rx="6"/>
+  <text x="340" y="576" text-anchor="middle">更新IP状态 → 未分配（status=1）</text>
+
+  <line x1="340" y1="591" x2="340" y2="618" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- Update pool count -->
+  <rect x="170" y="621" width="340" height="40" class="process" rx="6"/>
+  <text x="340" y="646" text-anchor="middle">更新地址池可用数量（available_count + 1）</text>
+
+  <line x1="340" y1="661" x2="340" y2="688" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <!-- Success -->
+  <rect x="230" y="691" width="220" height="36" class="success" rx="6"/>
+  <text x="340" y="714" text-anchor="middle">返回200"释放成功"</text>
+</svg>

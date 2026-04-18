@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.ip.system.mapper.IpAllocationMapper">
+    
+    <select id="selectBySubscriberId" resultType="com.cmcc.ip.system.entity.IpAllocation">
+        SELECT * FROM tb_ip_allocation
+        WHERE subscriber_id = #{subscriberId}
+    </select>
+    
+    <select id="selectByServiceOrderId" resultType="com.cmcc.ip.system.entity.IpAllocation">
+        SELECT * FROM tb_ip_allocation
+        WHERE service_order_id = #{serviceOrderId}
+    </select>
+    
+    <select id="selectActiveBySubscriberId" resultType="com.cmcc.ip.system.entity.IpAllocation">
+        SELECT * FROM tb_ip_allocation
+        WHERE subscriber_id = #{subscriberId} AND status = 1
+    </select>
+</mapper>

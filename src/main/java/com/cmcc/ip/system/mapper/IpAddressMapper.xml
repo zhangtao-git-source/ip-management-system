@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.ip.system.mapper.IpAddressMapper">
+    
+    <select id="selectAvailableList" resultType="com.cmcc.ip.system.entity.IpAddress">
+        SELECT * FROM tb_ip_address
+        WHERE status = 1
+        <if test="ipType != null">
+            AND ip_type = #{ipType}
+        </if>
+        <if test="regionCode != null and regionCode != ''">
+            AND region_code = #{regionCode}
+        </if>
+        <if test="addressPoolId != null">
+            AND address_pool_id = #{addressPoolId}
+        </if>
+        <if test="limitCount != null and limitCount > 0">
+            LIMIT #{limitCount}
+        </if>
+    </select>
+    
+    <select id="selectByAddressPoolId" resultType="com.cmcc.ip.system.entity.IpAddress">
+        SELECT * FROM tb_ip_address
+        WHERE address_pool_id = #{addressPoolId}
+    </select>
+    
+    <update id="updateStatusBatch">
+        UPDATE tb_ip_address
+        SET status = #{status}, updated_time = NOW()
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

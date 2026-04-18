@@ -1,0 +1,52 @@
+# Compiled class files
+target/
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+nul
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+
+# Build output
+build/
+out/
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Qoder agent files
+.qoder/
+
+# Vercel temp
+.vercel-tmp/
+vercel-deploy/
+
+# Preview server class files
+preview/*.class
+
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.local

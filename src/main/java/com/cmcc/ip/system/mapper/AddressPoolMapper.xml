@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.ip.system.mapper.AddressPoolMapper">
+    
+    <select id="selectByPriority" resultType="com.cmcc.ip.system.entity.AddressPool">
+        SELECT * FROM tb_address_pool
+        WHERE 1=1
+        <if test="ipType != null">
+            AND ip_type = #{ipType}
+        </if>
+        <if test="regionCode != null and regionCode != ''">
+            AND region_code = #{regionCode}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY priority ASC
+    </select>
+    
+    <update id="updateAvailableCount">
+        UPDATE tb_address_pool
+        SET available_count = available_count + #{count}
+        WHERE id = #{id}
+    </update>
+</mapper>

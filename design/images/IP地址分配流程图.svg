@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 920" width="800" height="920">
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#595959"/>
+    </marker>
+    <marker id="arrowRed1" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Microsoft YaHei", "SimHei", sans-serif; font-size: 13px; fill: #333; }
+    .title { font-size: 18px; font-weight: bold; fill: #1a1a2e; }
+    .start-end { fill: #1a1a2e; }
+    .start-end text { fill: #fff; font-size: 13px; }
+    .process { fill: #e8f4fd; stroke: #2196F3; stroke-width: 1.5; rx: 6; }
+    .process text { fill: #1565C0; }
+    .decision { fill: #fff3e0; stroke: #FF9800; stroke-width: 1.5; }
+    .decision text { fill: #E65100; font-size: 12px; }
+    .error { fill: #ffebee; stroke: #e74c3c; stroke-width: 1.5; rx: 6; }
+    .error text { fill: #c62828; }
+    .success { fill: #e8f5e9; stroke: #4CAF50; stroke-width: 1.5; rx: 6; }
+    .success text { fill: #2E7D32; }
+    .sub-step { fill: #f3e5f5; stroke: #9C27B0; stroke-width: 1; rx: 4; }
+    .sub-step text { fill: #6A1B9A; font-size: 11.5px; }
+    .label { font-size: 11px; fill: #e74c3c; font-weight: bold; }
+    .label-pass { font-size: 11px; fill: #4CAF50; font-weight: bold; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">IP地址分配流程</text>
+
+  <!-- Start -->
+  <ellipse cx="400" cy="65" rx="70" ry="22" class="start-end"/>
+  <text x="400" y="70" text-anchor="middle" fill="#fff" font-size="13">接收分配请求</text>
+
+  <!-- Arrow: Start → Validate -->
+  <line x1="400" y1="87" x2="400" y2="112" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+  <!-- Validate -->
+  <rect x="280" y="115" width="240" height="40" class="process" rx="6"/>
+  <text x="400" y="140" text-anchor="middle">参数校验（ipType / requireCount）</text>
+
+  <!-- Arrow: Validate → Decision1 -->
+  <line x1="400" y1="155" x2="400" y2="180" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+  <!-- Decision: 校验通过? -->
+  <polygon points="400,183 480,218 400,253 320,218" class="decision"/>
+  <text x="400" y="222" text-anchor="middle" class="decision">校验通过?</text>
+
+  <!-- No branch → Error -->
+  <line x1="320" y1="218" x2="180" y2="218" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed1)"/>
+  <text x="260" y="210" class="label">不通过</text>
+  <rect x="60" y="200" width="120" height="36" class="error" rx="6"/>
+  <text x="120" y="223" text-anchor="middle">返回400错误</text>
+
+  <!-- Yes branch -->
+  <line x1="400" y1="253" x2="400" y2="280" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <text x="415" y="270" class="label-pass">通过</text>
+
+  <!-- Query pools -->
+  <rect x="250" y="283" width="300" height="40" class="process" rx="6"/>
+  <text x="400" y="308" text-anchor="middle">按优先级查询可用地址池</text>
+
+  <!-- Arrow → Decision2 -->
+  <line x1="400" y1="323" x2="400" y2="348" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+  <!-- Decision: 有可用地址池? -->
+  <polygon points="400,351 490,386 400,421 310,386" class="decision"/>
+  <text x="400" y="390" text-anchor="middle" class="decision">有可用地址池?</text>
+
+  <!-- No branch → Error2 -->
+  <line x1="310" y1="386" x2="180" y2="386" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed1)"/>
+  <text x="250" y="378" class="label">无</text>
+  <rect x="40" y="368" width="140" height="36" class="error" rx="6"/>
+  <text x="110" y="391" text-anchor="middle">返回"无可用地址池"</text>
+
+  <!-- Yes branch -->
+  <line x1="400" y1="421" x2="400" y2="448" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <text x="415" y="438" class="label-pass">有</text>
+
+  <!-- Iterate pools -->
+  <rect x="260" y="451" width="280" height="40" class="process" rx="6"/>
+  <text x="400" y="476" text-anchor="middle">遍历地址池（按优先级从高到低）</text>
+
+  <!-- Arrow → Query IPs -->
+  <line x1="400" y1="491" x2="400" y2="516" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+  <!-- Query available IPs -->
+  <rect x="230" y="519" width="340" height="40" class="process" rx="6"/>
+  <text x="400" y="544" text-anchor="middle">查询池中可用IP列表（status=未分配）</text>
+
+  <!-- Arrow → Decision3 -->
+  <line x1="400" y1="559" x2="400" y2="584" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+  <!-- Decision: 有可用IP? -->
+  <polygon points="400,587 480,622 400,657 320,622" class="decision"/>
+  <text x="400" y="626" text-anchor="middle" class="decision">有可用IP?</text>
+
+  <!-- No branch → loop back to iterate -->
+  <line x1="320" y1="622" x2="220" y2="622" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="275" y="614" fill="#FF9800" font-size="11" font-weight="bold">无</text>
+  <line x1="220" y1="622" x2="220" y2="471" stroke="#FF9800" stroke-width="1.5"/>
+  <line x1="220" y1="471" x2="255" y2="471" stroke="#FF9800" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <text x="225" y="545" fill="#FF9800" font-size="11">尝试下一个地址池</text>
+
+  <!-- Yes branch -->
+  <line x1="400" y1="657" x2="400" y2="680" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <text x="415" y="672" class="label-pass">有</text>
+
+  <!-- Allocation sub-steps -->
+  <rect x="240" y="683" width="320" height="80" class="sub-step" rx="4"/>
+  <text x="400" y="703" text-anchor="middle">逐个分配：</text>
+  <text x="400" y="720" text-anchor="middle">① 更新IP状态→已分配(status=2)</text>
+  <text x="400" y="737" text-anchor="middle">② 创建分配记录(tb_ip_allocation)</text>
+  <text x="400" y="754" text-anchor="middle">③ 计算到期时间 ④ 更新地址池可用数量</text>
+
+  <!-- Arrow → Decision4 -->
+  <line x1="400" y1="763" x2="400" y2="790" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+
+  <!-- Decision: 满足需求? -->
+  <polygon points="400,793 490,828 400,863 310,828" class="decision"/>
+  <text x="400" y="832" text-anchor="middle" class="decision">满足需求数量?</text>
+
+  <!-- All satisfied -->
+  <line x1="490" y1="828" x2="620" y2="828" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <text x="540" y="820" class="label-pass">全部满足</text>
+  <rect x="620" y="810" width="150" height="36" class="success" rx="6"/>
+  <text x="695" y="833" text-anchor="middle">返回200"分配成功"</text>
+
+  <!-- Partial -->
+  <line x1="400" y1="863" x2="400" y2="893" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <text x="340" y="882" fill="#FF9800" font-size="11" font-weight="bold">部分满足</text>
+  <rect x="310" y="896" width="180" height="36" class="success" rx="6"/>
+  <text x="400" y="919" text-anchor="middle">返回201"部分分配成功"</text>
+
+  <!-- Note -->
+  <rect x="560" y="683" width="220" height="36" fill="#fffde7" stroke="#FBC02D" stroke-width="1" rx="4"/>
+  <text x="670" y="706" text-anchor="middle" fill="#F57F17" font-size="11">事务控制：@Transactional 全部回滚</text>
+</svg>

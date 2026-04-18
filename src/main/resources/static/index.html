@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国移动陕西公司 - IP地址管理系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon">🌐</div>
+            <h1>陕西移动IP管理</h1>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">总览</div>
+            <div class="nav-item active" data-page="dashboard"><span class="icon">📊</span> 系统首页</div>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">资源管理</div>
+            <div class="nav-item" data-page="pool"><span class="icon">🗂️</span> 地址池管理</div>
+            <div class="nav-item" data-page="ipaddr"><span class="icon">🖥️</span> IP地址管理</div>
+            <div class="nav-item" data-page="binding"><span class="icon">🔗</span> IP绑定管理</div>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">业务管理</div>
+            <div class="nav-item" data-page="allocation"><span class="icon">📋</span> 地址分配管理</div>
+            <div class="nav-item" data-page="device"><span class="icon">📡</span> 设备管理</div>
+            <div class="nav-item" data-page="audit"><span class="icon">🔍</span> 稽核管理</div>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">系统</div>
+            <div class="nav-item" data-page="report"><span class="icon">📈</span> 统计报表</div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="header">
+            <div class="header-left">
+                <div class="breadcrumb">IP地址管理系统 / <span id="page-title">系统首页</span></div>
+            </div>
+            <div class="header-right">
+                <span class="notif" style="cursor:pointer">🔔</span>
+                <div class="avatar">管</div>
+                <div class="user-info">管理员 admin</div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="page active" id="page-dashboard"><div class="loading">加载中...</div></div>
+            <div class="page" id="page-pool"><div class="loading">加载中...</div></div>
+            <div class="page" id="page-ipaddr"><div class="loading">加载中...</div></div>
+            <div class="page" id="page-allocation"><div class="loading">加载中...</div></div>
+            <div class="page" id="page-device"><div class="loading">加载中...</div></div>
+            <div class="page" id="page-audit"><div class="loading">加载中...</div></div>
+            <div class="page" id="page-binding"><div class="loading">加载中...</div></div>
+            <div class="page" id="page-report"><div class="loading">加载中...</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Dialog Container -->
+<div class="dialog-overlay" id="dialog-overlay">
+    <div class="dialog">
+        <div class="dialog-header"><h3 id="dialog-title">对话框</h3><div class="dialog-close" onclick="closeDialog()">✕</div></div>
+        <div class="dialog-body" id="dialog-body"></div>
+        <div class="dialog-footer" id="dialog-footer"></div>
+    </div>
+</div>
+
+<script src="js/api.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
+</body>
+</html>

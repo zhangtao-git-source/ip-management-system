@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" width="600" height="460">
+  <defs>
+    <marker id="arrow3" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#595959"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Microsoft YaHei", "SimHei", sans-serif; font-size: 13px; fill: #333; }
+    .title { font-size: 18px; font-weight: bold; fill: #1a1a2e; }
+    .process { fill: #e8f4fd; stroke: #2196F3; stroke-width: 1.5; rx: 6; }
+    .process text { fill: #1565C0; }
+    .success { fill: #e8f5e9; stroke: #4CAF50; stroke-width: 1.5; rx: 6; }
+    .success text { fill: #2E7D32; }
+    .calc { fill: #fff3e0; stroke: #FF9800; stroke-width: 1.5; rx: 6; }
+    .calc text { fill: #E65100; }
+  </style>
+
+  <text x="300" y="30" text-anchor="middle" class="title">IP地址续约流程</text>
+
+  <!-- Start -->
+  <ellipse cx="300" cy="65" rx="95" ry="22" fill="#1a1a2e"/>
+  <text x="300" y="70" text-anchor="middle" fill="#fff" font-size="13">接收续约请求</text>
+
+  <line x1="300" y1="87" x2="300" y2="115" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow3)"/>
+
+  <!-- Query allocation -->
+  <rect x="180" y="118" width="240" height="40" class="process" rx="6"/>
+  <text x="300" y="143" text-anchor="middle">查询分配记录</text>
+
+  <line x1="300" y1="158" x2="300" y2="186" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow3)"/>
+
+  <!-- Calculate new expiration -->
+  <rect x="120" y="189" width="360" height="55" class="calc" rx="6"/>
+  <text x="300" y="212" text-anchor="middle">计算新到期时间</text>
+  <text x="300" y="232" text-anchor="middle" font-size="12">= 原到期时间 + extendDays天</text>
+
+  <line x1="300" y1="244" x2="300" y2="272" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow3)"/>
+
+  <!-- Update expiration -->
+  <rect x="150" y="275" width="300" height="40" class="process" rx="6"/>
+  <text x="300" y="300" text-anchor="middle">更新分配记录的expiration_time</text>
+
+  <line x1="300" y1="315" x2="300" y2="343" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow3)"/>
+
+  <!-- Success -->
+  <rect x="190" y="346" width="220" height="36" class="success" rx="6"/>
+  <text x="300" y="369" text-anchor="middle">返回200"续约成功"</text>
+</svg>

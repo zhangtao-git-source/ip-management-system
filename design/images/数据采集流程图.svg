@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 660" width="720" height="660">
+  <defs>
+    <marker id="arrow4" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#595959"/>
+    </marker>
+    <marker id="arrowRed4" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+    <marker id="arrowGreen4" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Microsoft YaHei", "SimHei", sans-serif; font-size: 13px; fill: #333; }
+    .title { font-size: 18px; font-weight: bold; fill: #1a1a2e; }
+    .process { fill: #e8f4fd; stroke: #2196F3; stroke-width: 1.5; rx: 6; }
+    .process text { fill: #1565C0; }
+    .decision { fill: #fff3e0; stroke: #FF9800; stroke-width: 1.5; }
+    .decision text { fill: #E65100; font-size: 12px; }
+    .error { fill: #ffebee; stroke: #e74c3c; stroke-width: 1.5; rx: 6; }
+    .error text { fill: #c62828; }
+    .success { fill: #e8f5e9; stroke: #4CAF50; stroke-width: 1.5; rx: 6; }
+    .success text { fill: #2E7D32; }
+    .update { fill: #e0f2f1; stroke: #009688; stroke-width: 1.5; rx: 6; }
+    .update text { fill: #00695C; }
+    .create { fill: #f3e5f5; stroke: #9C27B0; stroke-width: 1.5; rx: 6; }
+    .create text { fill: #6A1B9A; }
+    .label-no { font-size: 11px; fill: #e74c3c; font-weight: bold; }
+    .label-yes { font-size: 11px; fill: #4CAF50; font-weight: bold; }
+  </style>
+
+  <text x="360" y="30" text-anchor="middle" class="title">数据采集流程</text>
+
+  <!-- Start -->
+  <ellipse cx="360" cy="65" rx="90" ry="22" fill="#1a1a2e"/>
+  <text x="360" y="70" text-anchor="middle" fill="#fff" font-size="13">接收采集数据</text>
+
+  <line x1="360" y1="87" x2="360" y2="115" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <!-- Validate -->
+  <rect x="210" y="118" width="300" height="40" class="process" rx="6"/>
+  <text x="360" y="143" text-anchor="middle">校验设备编码和IP列表</text>
+
+  <line x1="360" y1="158" x2="360" y2="186" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <!-- Decision: device exists? -->
+  <polygon points="360,189 440,224 360,259 280,224" class="decision"/>
+  <text x="360" y="228" text-anchor="middle" class="decision">设备存在?</text>
+
+  <!-- No → Error -->
+  <line x1="280" y1="224" x2="150" y2="224" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed4)"/>
+  <text x="225" y="216" class="label-no">不存在</text>
+  <rect x="40" y="206" width="110" height="36" class="error" rx="6"/>
+  <text x="95" y="229" text-anchor="middle">返回400</text>
+
+  <!-- Yes → Iterate ipList -->
+  <line x1="360" y1="259" x2="360" y2="286" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow4)"/>
+  <text x="375" y="278" class="label-yes">存在</text>
+
+  <!-- Iterate -->
+  <rect x="240" y="289" width="240" height="40" class="process" rx="6"/>
+  <text x="360" y="314" text-anchor="middle">遍历 ipList</text>
+
+  <line x1="360" y1="329" x2="360" y2="356" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <!-- Decision: IP exists? -->
+  <polygon points="360,359 440,394 360,429 280,394" class="decision"/>
+  <text x="360" y="398" text-anchor="middle" class="decision">IP已存在?</text>
+
+  <!-- Yes → Update -->
+  <line x1="440" y1="394" x2="560" y2="394" stroke="#009688" stroke-width="1.5" marker-end="url(#arrowGreen4)"/>
+  <text x="490" y="386" fill="#009688" font-size="11" font-weight="bold">已存在</text>
+  <rect x="460" y="376" width="230" height="36" class="update" rx="6"/>
+  <text x="575" y="399" text-anchor="middle">更新状态和设备关联</text>
+
+  <!-- No → Create -->
+  <line x1="280" y1="394" x2="150" y2="394" stroke="#9C27B0" stroke-width="1.5"/>
+  <text x="225" y="386" fill="#9C27B0" font-size="11" font-weight="bold">不存在</text>
+  <rect x="20" y="376" width="210" height="36" class="create" rx="6"/>
+  <text x="125" y="399" text-anchor="middle">新建IP地址记录</text>
+
+  <!-- Both converge → Update device time -->
+  <line x1="575" y1="412" x2="575" y2="470" stroke="#595959" stroke-width="1.5"/>
+  <line x1="125" y1="412" x2="125" y2="470" stroke="#595959" stroke-width="1.5"/>
+  <line x1="125" y1="470" x2="575" y2="470" stroke="#595959" stroke-width="1.5"/>
+  <line x1="360" y1="470" x2="360" y2="498" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <!-- Update device last collection time -->
+  <rect x="190" y="501" width="340" height="40" class="process" rx="6"/>
+  <text x="360" y="526" text-anchor="middle">更新设备最后采集时间</text>
+
+  <line x1="360" y1="541" x2="360" y2="568" stroke="#595959" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <!-- Return result -->
+  <rect x="210" y="571" width="300" height="40" class="success" rx="6"/>
+  <text x="360" y="596" text-anchor="middle">返回成功数和失败列表</text>
+</svg>
